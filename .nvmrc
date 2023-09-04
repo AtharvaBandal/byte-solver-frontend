@@ -1,0 +1,4 @@
+14
+[build]
+  command = "npm install"
+  environment = { NODE_VERSION = "14", NPM_VERSION = "7" }

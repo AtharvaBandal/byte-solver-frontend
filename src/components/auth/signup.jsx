@@ -15,7 +15,7 @@ const Signup = () => {
     try {
       const res = await axios({
         method: 'POST',
-        url: 'https://student-club-website-api12.vercel.app/user/signup',
+        url: 'https://college-club-website-client.vercel.app/user/signup',
         data: {
           name,
           email,

@@ -32,7 +32,7 @@ const Navbar = () => {
     try{
       const res = await axios({
         method:'GET', 
-        url:'https://student-club-website-api12.vercel.app/user/logout',
+        url:'https://college-club-website-client.vercel.app/user/logout',
         withCredentials: true
       });
 

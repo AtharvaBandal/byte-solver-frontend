@@ -28,7 +28,7 @@ const Question = () => {
             const getAllquestions = async () => {
                 const res = await axios({
                   method: 'GET',
-                  url:  'https://student-club-website-api12.vercel.app/post/getAllPost',
+                  url:  'https://college-club-website-client.vercel.app/post/getAllPost',
                   withCredentials: true,
                 });
               // console.log(res.data.data.posts[0].difficulty);

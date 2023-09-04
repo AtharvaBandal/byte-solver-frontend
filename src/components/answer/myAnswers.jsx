@@ -14,7 +14,7 @@ const MyAnswers = () => {
     const handleMyAnswers = async () => {
       const res = await axios({
         method: 'GET',
-        url: `https://student-club-website-api12.vercel.app/answer/getAnswer_user/${user._id}`,
+        url: `https://college-club-website-client.vercel.app/answer/getAnswer_user/${user._id}`,
         withCredentials: true,
       });
 

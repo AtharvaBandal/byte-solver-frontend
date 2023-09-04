@@ -20,7 +20,7 @@ const CreateQuestion = () => {
     try {
         
       const response = await axios.post(
-        'https://student-club-website-api12.vercel.app/post/createPost',
+        'https://college-club-website-client.vercel.app/post/createPost',
         {
           name:title,
           description:question,

@@ -17,7 +17,7 @@ const Answer = () => {
     try {
       const res = await axios({
         method: 'POST',
-        url: 'https://student-club-website-api12.vercel.app/answer/submitAnswer',
+        url: 'https://college-club-website-client.vercel.app/',
         data: {
           user: user_id,
           post: id,

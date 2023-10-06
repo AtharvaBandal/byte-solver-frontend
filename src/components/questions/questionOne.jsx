@@ -12,13 +12,14 @@ const formatDate = (dateString) => {
 
 const QuestionOne = () => {
   const { id } = useParams(); 
+  const user = useSelector((state) => state.User.user);
   const allQuestions = useSelector((state)=> state.Post.questions);
   const question = allQuestions.find((q) => q._id === id);
   // console.log(question);
  
   return (
-    <div className="pt-20 h-screen w-full ">
-      <div className="bg-black md:m-10 p-4 rounded-2xl flex flex-col gap-4 ">
+    <div className="pt-20 h-full w-full ">
+      <div className="bg-black md:m-10 p-4 rounded-2xl flex flex-col gap-4  overflow-hidden">
         <div className="flex justify-around">
           <p>{formatDate(question.createdAt)}</p>
           <div className="text-base md:text-sm font-semibold">{question.difficulty}</div>
@@ -43,20 +44,25 @@ const QuestionOne = () => {
                 <div>
                   <BiCommentDetail className="m-1" />
                 </div>
-                <div> 20Answers</div>
+                <div> {question?.answers?.length} Answers</div>
               </div>
             </Link>
           </div>
 
           <div className="my-2 mx-3 flex gap-2 hover:text-white">
-            <Link to={`/createAnswer/${question._id}`}>
-              <div className="flex flex-row gap-1">
-                <div>Answer</div>
-                <div>
-                  <IoMdAddCircleOutline className="m-1" />
-                </div>
-              </div>
-            </Link>
+            {user?(
+               <Link to={`/createAnswer/${question._id}`}>
+               <div className="flex flex-row gap-1">
+                 <div>Answer</div>
+                 <div>
+                   <IoMdAddCircleOutline className="m-1" />
+                 </div>
+               </div>
+             </Link>
+            ):(
+              <Link to="/login">Login to Answer</Link>
+            )}
+           
           </div>
         </div>
       </div>

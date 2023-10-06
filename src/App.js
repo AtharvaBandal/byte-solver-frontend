@@ -11,6 +11,7 @@ import QuestionOne from "./components/questions/questionOne"
 import CreateQuestion from "./components/questions/createQuestion";
 import Answer from "./components/answer/createAnswer";
 import AnswersList from "./components/answer/getAnswersList";
+import OtherProfile from "./components/profile/otherProfile"
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
           <Route path="/createQuestion/:id" element={<CreateQuestion/>}/>
           <Route path="/createAnswer/:id" element={<Answer/>}/>
           <Route path="/getAnswers/:id" element={<AnswersList/>}/>
+          <Route path="/getOtherProfile/:id" element={<OtherProfile/>}/>
+          
         </Routes>
         <Footer />
      </BrowserRouter>

@@ -15,7 +15,8 @@ const Signup = () => {
     try {
       const res = await axios({
         method: 'POST',
-        url: 'https://college-club-website-client.vercel.app/user/signup',
+        url: 'https://byte-solver-backend.onrender.com/user/signup',
+        url:'http://localhost:3000/user/signup',
         data: {
           name,
           email,
@@ -51,7 +52,7 @@ const Signup = () => {
               </label>
               <input
                 type="text"
-                placeholder="Name"
+                placeholder=""
                 className="input input-bordered"
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -64,7 +65,7 @@ const Signup = () => {
               </label>
               <input
                 type="text"
-                placeholder="Email"
+                placeholder=""
                 className="input input-bordered"
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -77,7 +78,7 @@ const Signup = () => {
               </label>
               <input
                 type="password"
-                placeholder="Password"
+                placeholder=""
                 className="input input-bordered"
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -90,7 +91,7 @@ const Signup = () => {
               </label>
               <input
                 type="password"
-                placeholder="Confirm Password"
+                placeholder=""
                 className="input input-bordered"
                 onChange={(e) => setPasswordConfirm(e.target.value)}
                 required
@@ -103,7 +104,7 @@ const Signup = () => {
               </label>
               <input
                 type="text"
-                placeholder="Year"
+                placeholder=""
                 className="input input-bordered"
                 onChange={(e) => setYear(e.target.value)}
                 required
@@ -116,7 +117,7 @@ const Signup = () => {
               </label>
               <input
                 type="text"
-                placeholder="Enrollment Number"
+                placeholder=""
                 className="input input-bordered"
                 onChange={(e) => setEnrollment(e.target.value)}
                 required

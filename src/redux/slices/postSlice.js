@@ -11,7 +11,7 @@ const PostSlice = createSlice({
             state.questions = action.payload.questions;
         },
         addQuestion: (state, action) => {
-            state.questions.push(action.payload.question);
+            state.questions.unshift(action.payload.question);
         },
         setLogoutPosts: (state) =>{
             state.questions = null;

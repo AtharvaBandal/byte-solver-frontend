@@ -12,29 +12,47 @@ const Login = () => {
   const [email, setEmail] = useState();
   const [pwd, setPwd] = useState();
 
-  const handleLogin = async()=>{
-   
-    try{
+  const handleLogin = async () => {
+    // Validate email and password
+    if (!email || !pwd) {
+      alert('Please fill in both email and password fields.');
+      return;
+    }
+  
+    // Show loading indicator
+    // You can set a loading state here
+  
+    try {
       const res = await axios({
         method: 'POST',
-        url:'https://college-club-website-client.vercel.app/user/login',
-        data:{
+        url: 'https://byte-solver-backend.onrender.com/user/login',
+        url:`http://localhost:3000/user/login`,
+        data: {
           email,
-          password:pwd
+          password: pwd,
         },
-        withCredentials: true
-      })
-      if(res.data.status==="success"){
-          alert('Sucessfully logged in');
-          dispatch(setLogin({user: res.data.data.User}));
-          navigate("/");
-       }
+        withCredentials: true,
+      });
   
-    }catch(err){
-      alert('Please try Again!!')   
-      console.log(err);
+      if (res.data.status === 'success') {
+        alert('Successfully logged in');
+        // Dispatch the user action and navigate
+        dispatch(setLogin({ user: res.data.data.User }));
+        navigate('/questions');
+      } else {
+        // Handle login failure
+        alert('Login failed. Please check your credentials and try again.');
+      }
+    } catch (err) {
+      // Handle network errors or other unexpected errors
+      console.error(err);
+      alert('An error occurred while logging in. Please try again later.');
+    } finally {
+      // Hide loading indicator
+      // You can clear the loading state here
     }
-  }
+  };
+  
 
   return (
     <div className="min-h-screen bg-base-200 pt-32">

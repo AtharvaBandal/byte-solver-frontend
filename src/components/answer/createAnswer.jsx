@@ -2,14 +2,15 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams,useNavigate } from 'react-router-dom';
+import { setLogin,updateUser } from '../../redux/slices/userSlice';
 
 const Answer = () => {
-  const user_id = useSelector((state) => state.User.user?._id);
+  const user = useSelector((state) => state.User.user);
   const [answer, setAnswer] = useState('');
   const [language, setLanguage] = useState(''); 
   const navigate = useNavigate()
   const { id } = useParams(); 
-
+  const dispatch = useDispatch();
 
 
  
@@ -17,20 +18,22 @@ const Answer = () => {
     try {
       const res = await axios({
         method: 'POST',
-        url: 'https://college-club-website-client.vercel.app/',
+        // url: `https://byte-solver-backend.onrender.com/answer/submitAnswer/${user_id}`,
+        url:`http://localhost:3000/answer/submitAnswer/${user._id}`,
         data: {
-          user: user_id,
           post: id,
           text: answer,
           language: language,
         },
       });
-
+        console.log(res);
       if (res.data.status === 'success') {
-        // Show a success message in the UI
+       
         alert('Answer was successfully submitted');
-
+        
+        dispatch(setLogin({user:res.data.data.user }));
         navigate(`/questionOne/${id}`);
+
       } 
       setAnswer('');
       setLanguage('');

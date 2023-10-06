@@ -12,6 +12,7 @@ const Question = () => {
     const [UserRole,setUserRole] = useState(false);
     const role = useSelector((state) => state.User.user?.roles);
     const questions = useSelector((state)=> state.Post.questions);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         if(role==='admin'||role==='member'){
@@ -20,32 +21,44 @@ const Question = () => {
         else if(role==='user'){
             setUserRole(false);
         }
-      },[role])
+    },[role])
 
     
     
     useEffect(() => {
-            const getAllquestions = async () => {
-                const res = await axios({
-                  method: 'GET',
-                  url:  'https://college-club-website-client.vercel.app/post/getAllPost',
-                  withCredentials: true,
-                });
-              // console.log(res.data.data.posts[0].difficulty);
-                if(res.data.status === 'success')
-                {
-                    // console.log(res.data.data.posts);
-                    const questions = res.data.data.posts;
-                    dispatch(setQuestion({questions: questions}));
+        const getAllquestions = async () => {
+            try{                
+                if(!questions)
+                {  const res = await axios({
+                        method: 'GET',
+                        url:  'https://byte-solver-backend.onrender.com/post/getAllPost',
+                        url:'http://localhost:3000/post/getAllPost',
+                        withCredentials: true,
+                    });
+                    // console.log(res.data.data.posts[0].difficulty);
+                    if(res.data.status === 'success')
+                    {
+                        // console.log(res.data.data.posts);
+                        const questions = res.data.data.posts.reverse();
+
+                        dispatch(setQuestion({questions: questions}));
+                    }
                 }
-                else{
-                    console.log('something went wrong while getting questions')
-                }
+            }catch (error) {
+                console.log('something went wrong while getting questions\n');
+                console.log(error);
             }
-           getAllquestions();
-    },[])
+        }
+       getAllquestions();
+   },[])
     
-   
+
+   const filteredQuestions = questions.filter((question) =>
+        question.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        question.description.toLowerCase().includes(searchQuery.toLowerCase())||
+        question.category.toLowerCase().includes(searchQuery.toLowerCase())||
+        question.difficulty.toLowerCase().includes(searchQuery.toLowerCase())
+    );
     
 return(
     
@@ -57,8 +70,19 @@ return(
            </Link> 
         </div>
         )}
+        
+        <div className='mb-4 mx-auto max-w-md'>
+        <input
+          type='text'
+          placeholder='Search questions by topic or difficuilty.........'
+          className='w-full px-4 py-2 border border-gray-300 rounded-md bg-black'
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+
         <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
-            {questions?.map((question) => (
+            {filteredQuestions?.map((question) => (
                 <div key={question._id} className="bg-black p-4 rounded-2xl">
                     <div className=" rounded-lg overflow-hidden">
                         <div>

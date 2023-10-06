@@ -20,7 +20,8 @@ const CreateQuestion = () => {
     try {
         
       const response = await axios.post(
-        'https://college-club-website-client.vercel.app/post/createPost',
+        'https://byte-solver-backend.onrender.com/post/createPost',
+        // 'http://localhost:3000/post/createPost',
         {
           name:title,
           description:question,
@@ -34,7 +35,7 @@ const CreateQuestion = () => {
         }
       );
 
-      console.log(response.data.data);
+      console.log(response);
 
       
       if(response.data.status ==='success') {
